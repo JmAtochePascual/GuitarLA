@@ -1,4 +1,4 @@
-const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra }) => {
+const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra, vaciarCarrito }) => {
 
   // Total a pagar
   const totalPagar = carrito.reduce((acc, item) => acc + item.price * item.cantidad, 0);
@@ -80,7 +80,11 @@ const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra }
                       </table>
 
                       <p className="text-end">Total pagar: <span className="fw-bold">${totalPagar}</span></p>
-                      <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                      <button
+                        onClick={vaciarCarrito}
+                        className="btn btn-dark w-100 mt-3 p-2">
+                        Vaciar Carrito
+                      </button>
                     </>
                 }
               </div>

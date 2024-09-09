@@ -43,6 +43,11 @@ function App() {
     setCarrito(newCarrito);
   }
 
+  // Vaciar carrito
+  const vaciarCarrito = () => {
+    setCarrito([]);
+  }
+
   // Agregar guitarra al carrito
   const agregarAumetarCantidad = (guitar) => {
     const exist = carrito.find((item) => item.id === guitar.id);
@@ -62,6 +67,7 @@ function App() {
         reducirCantidad={reducirCantidad}
         aumentarCantidad={aumentarCantidad}
         eliminarGuitarra={eliminarGuitarra}
+        vaciarCarrito={vaciarCarrito}
       />
 
       <main className="container-xl mt-5">
