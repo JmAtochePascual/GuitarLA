@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { db } from './data/db';
 import Header from "./components/Header"
@@ -6,7 +6,12 @@ import Guitar from "./components/Guitar";
 
 function App() {
   const [data, setData] = useState(db);
-  const [carrito, setCarrito] = useState([]);
+  const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem('carritoLA')) || []);
+
+  // Guardar carrito en localStorage
+  useEffect(() => {
+    localStorage.setItem('carritoLA', JSON.stringify(carrito));
+  }, [carrito]);
 
   // Eliminar guitarra del carrito
   const eliminarGuitarra = (id) => {
