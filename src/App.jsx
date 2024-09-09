@@ -5,8 +5,32 @@ import Header from "./components/Header"
 import Guitar from "./components/Guitar";
 
 function App() {
-  const [carrito, setCarrito] = useState(db);
+  const [data, setData] = useState(db);
+  const [carrito, setCarrito] = useState([]);
 
+  // Aumentar cantidad
+  const aumentarCantidad = (id) => {
+    const newCarrito = carrito.map((item) => item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item);
+    setCarrito(newCarrito);
+  }
+
+  // Reducir cantidad
+  const reducirCantidad = (id) => {
+    const newCarrito = carrito.map((item) => item.id === id ? { ...item, cantidad: item.cantidad - 1 } : item);
+    setCarrito(newCarrito);
+  }
+
+  // Agregar guitarra al carrito
+  const agregarAumetarCantidad = (guitar) => {
+    const exist = carrito.find((item) => item.id === guitar.id);
+
+    if (exist) {
+      aumentarCantidad(guitar.id);
+      return;
+    }
+
+    setCarrito([...carrito, { ...guitar, cantidad: 1 }]);
+  }
 
   return (
     <>
@@ -17,10 +41,12 @@ function App() {
 
         <div className="row mt-5">
           {
-            carrito.map((guitar) => (
+            data.map((guitar) => (
               <Guitar
                 key={guitar.id}
-                guitar={guitar} />
+                guitar={guitar}
+                agregarAumetarCantidad={agregarAumetarCantidad}
+              />
             ))
           }
         </div>
