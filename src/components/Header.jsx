@@ -3,6 +3,9 @@ const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra }
   // Total a pagar
   const totalPagar = carrito.reduce((acc, item) => acc + item.price * item.cantidad, 0);
 
+  // Verificar si hay items carrito tiene items
+  const carritoVacio = carrito.length === 0;
+
   return (
     <header className="py-5 header">
       <div className="container-xl">
@@ -19,61 +22,67 @@ const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra }
               <img className="img-fluid" src="/img/carrito.png" alt="imagen carrito" />
 
               <div id="carrito" className="bg-white p-3">
-                <p className="text-center">El carrito esta vacio</p>
-                <table className="w-100 table">
-                  <thead>
-                    <tr>
-                      <th>Imagen</th>
-                      <th>Nombre</th>
-                      <th>Precio</th>
-                      <th>Cantidad</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      carrito.map((item) => (
-                        <tr
-                          key={item.id}
-                        >
-                          <td>
-                            <img className="img-fluid" src={`/img/${item.image}.jpg`} alt={item.nombre} />
-                          </td>
-                          <td>SRV</td>
-                          <td className="fw-bold">
-                            ${item.price}
-                          </td>
-                          <td className="flex align-items-start gap-4">
-                            <button
-                              type="button"
-                              className="btn btn-dark"
-                              onClick={() => reducirCantidad(item.id)}>
-                              -
-                            </button>
-                            {item.cantidad}
-                            <button
-                              type="button"
-                              className="btn btn-dark"
-                              onClick={() => aumentarCantidad(item.id)}>
-                              +
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              type="button"
-                              onClick={() => eliminarGuitarra(item.id)}
-                              className="btn btn-danger">
-                              X
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                    }
-                  </tbody>
-                </table>
 
-                <p className="text-end">Total pagar: <span className="fw-bold">${totalPagar}</span></p>
-                <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                {
+                  carritoVacio
+                    ? <p className="text-center">El carrito esta vacio</p>
+                    : <>
+                      <table className="w-100 table">
+                        <thead>
+                          <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            carrito.map((item) => (
+                              <tr
+                                key={item.id}
+                              >
+                                <td>
+                                  <img className="img-fluid" src={`/img/${item.image}.jpg`} alt={item.nombre} />
+                                </td>
+                                <td>SRV</td>
+                                <td className="fw-bold">
+                                  ${item.price}
+                                </td>
+                                <td className="flex align-items-start gap-4">
+                                  <button
+                                    type="button"
+                                    className="btn btn-dark"
+                                    onClick={() => reducirCantidad(item.id)}>
+                                    -
+                                  </button>
+                                  {item.cantidad}
+                                  <button
+                                    type="button"
+                                    className="btn btn-dark"
+                                    onClick={() => aumentarCantidad(item.id)}>
+                                    +
+                                  </button>
+                                </td>
+                                <td>
+                                  <button
+                                    type="button"
+                                    onClick={() => eliminarGuitarra(item.id)}
+                                    className="btn btn-danger">
+                                    X
+                                  </button>
+                                </td>
+                              </tr>
+                            ))
+                          }
+                        </tbody>
+                      </table>
+
+                      <p className="text-end">Total pagar: <span className="fw-bold">${totalPagar}</span></p>
+                      <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                    </>
+                }
               </div>
             </div>
           </nav>

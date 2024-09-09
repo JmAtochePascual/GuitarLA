@@ -16,6 +16,11 @@ function App() {
 
   // Aumentar cantidad
   const aumentarCantidad = (id) => {
+    // Si la cantidad es 5 no permitir agregar más
+    if (carrito.find((item) => item.id === id).cantidad === 5) {
+      return;
+    }
+
     const newCarrito = carrito.map((item) => item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item);
     setCarrito(newCarrito);
   }
