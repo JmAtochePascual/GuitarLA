@@ -1,4 +1,8 @@
 const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra }) => {
+
+  // Total a pagar
+  const totalPagar = carrito.reduce((acc, item) => acc + item.price * item.cantidad, 0);
+
   return (
     <header className="py-5 header">
       <div className="container-xl">
@@ -68,7 +72,7 @@ const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra }
                   </tbody>
                 </table>
 
-                <p className="text-end">Total pagar: <span className="fw-bold">$899</span></p>
+                <p className="text-end">Total pagar: <span className="fw-bold">${totalPagar}</span></p>
                 <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
               </div>
             </div>
