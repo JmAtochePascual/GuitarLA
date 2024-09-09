@@ -8,6 +8,12 @@ function App() {
   const [data, setData] = useState(db);
   const [carrito, setCarrito] = useState([]);
 
+  // Eliminar guitarra del carrito
+  const eliminarGuitarra = (id) => {
+    const newCarrito = carrito.filter((item) => item.id !== id);
+    setCarrito(newCarrito);
+  }
+
   // Aumentar cantidad
   const aumentarCantidad = (id) => {
     const newCarrito = carrito.map((item) => item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item);
@@ -16,6 +22,13 @@ function App() {
 
   // Reducir cantidad
   const reducirCantidad = (id) => {
+    // Si la cantidad es 1, eliminar el item
+    if (carrito.find((item) => item.id === id).cantidad === 1) {
+      eliminarGuitarra(id);
+      return;
+    }
+
+    // Reducir la cantidad en 1 
     const newCarrito = carrito.map((item) => item.id === id ? { ...item, cantidad: item.cantidad - 1 } : item);
     setCarrito(newCarrito);
   }
@@ -34,7 +47,12 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header
+        carrito={carrito}
+        reducirCantidad={reducirCantidad}
+        aumentarCantidad={aumentarCantidad}
+        eliminarGuitarra={eliminarGuitarra}
+      />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
