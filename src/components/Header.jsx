@@ -12,7 +12,7 @@ const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra, 
         <div className="row justify-content-center justify-content-md-between">
           <div className="col-8 col-md-3">
             <a href="index.html">
-              <img className="img-fluid" src="./img/logo.svg" alt="imagen logo" />
+              <img className="img-fluid" src="img/logo.svg" alt="imagen logo" />
             </a>
           </div>
           <nav className="col-md-6 a mt-5 d-flex align-items-start justify-content-end">
@@ -44,7 +44,7 @@ const Header = ({ carrito, reducirCantidad, aumentarCantidad, eliminarGuitarra, 
                                 key={item.id}
                               >
                                 <td>
-                                  <img className="img-fluid" src={`./img/${item.image}.jpg`} alt={item.nombre} />
+                                  <img className="img-fluid" src={`img/${item.image}.jpg`} alt={item.nombre} />
                                 </td>
                                 <td>SRV</td>
                                 <td className="fw-bold">
